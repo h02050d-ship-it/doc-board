@@ -86,43 +86,49 @@ const SNAPSHOT = {
   ],
   groups: [
     { title:"市売（毎週・精算書/納品書）", vendors:[
-      { n:"丸宇 大栄浜", ch:["mail","fax"], s:"fixed" },
-      { n:"丸宇 北浜",   ch:["mail","fax"], s:"fixed" },
-      { n:"丸宇 下館",   ch:["mail","fax"], s:"fixed" },
-      { n:"丸宇 京葉",   ch:["mail","fax"], s:"fixed" },
-      { n:"勝山木材市場", ch:["mail","fax"], s:"active" },
-      { n:"ナイス 沼津/浜松ほか", ch:["mail","fax"], s:"active" },
-      { n:"アイザワ", ch:["fax"], s:"active" },
+      { n:"丸宇 下館",   ch:["mail","fax"], s:"fixed",  lastSaved:"06/19" },
+      { n:"丸宇 大栄浜", ch:["mail","fax"], s:"fixed",  lastSaved:"06/17" },
+      { n:"丸宇 北浜",   ch:["mail","fax"], s:"fixed",  lastSaved:"06/11" },
+      { n:"丸宇 京葉",   ch:["mail","fax"], s:"fixed",  lastSaved:"06/05" },
+      { n:"ナイス 小牧", ch:["mail","fax"], s:"active", lastSaved:"06/22" },
+      { n:"ナイス 沼津", ch:["mail","fax"], s:"active", lastSaved:"06/11" },
+      { n:"ナイス 浜松", ch:["mail","fax"], s:"active", lastSaved:"06/11" },
+      { n:"ナイス 新潟", ch:["mail","fax"], s:"active", lastSaved:"06/10" },
+      { n:"ナイス 相模原", ch:["mail","fax"], s:"active", lastSaved:"06/05" },
+      { n:"ナイス 横浜", ch:["mail","fax"], s:"warn",  lastSaved:"05/12" },
+      { n:"勝山木材市場", ch:["mail","fax"], s:"active", lastSaved:"06/18" },
+      { n:"アイザワ", ch:["fax"], s:"active", lastSaved:"06/05" },
+      { n:"HIKARI", ch:["fax"], s:"active", lastSaved:"06/12" },
+      { n:"千葉県木材市場協組", ch:["mail","fax"], s:"warn", lastSaved:"06/05" },
+      { n:"中央木材 大口", ch:["fax"], s:"warn", lastSaved:"05/21" },
+      { n:"中央木材 西部/浜松", ch:["fax"], s:"active" },
       { n:"金平", ch:["fax"], s:"active" },
-      { n:"千葉県木材市場協組", ch:["mail","fax"], s:"warn" },
-      { n:"中央木材 西部/浜松/大口", ch:["fax"], s:"active" },
-      { n:"HIKARI", ch:["fax"], s:"active" },
       { n:"ミトモク日立", ch:["fax"], s:"active" },
       { n:"吉貞 熊谷/佐野", ch:["fax"], s:"active" }
     ]},
     { title:"付売（毎月・請求書）", vendors:[
       { n:"ナイス 資材事業部", ch:["mail"], s:"active" },
-      { n:"イチカワ", ch:["mail","fax"], s:"active" },
+      { n:"イチカワ", ch:["mail","fax"], s:"active", lastSaved:"06/22" },
+      { n:"オオツカ", ch:["mail","fax"], s:"active", lastSaved:"06/20" },
+      { n:"ニッチ / 松本", ch:["mail","fax"], s:"active", lastSaved:"06/20" },
       { n:"糸永", ch:["mail"], s:"active" },
-      { n:"オオツカ", ch:["mail","fax"], s:"active" },
-      { n:"ニッチ / 松本", ch:["mail","fax"], s:"active" },
       { n:"カネ信木材", ch:["fax"], s:"active" },
-      { n:"滝川", ch:["fax"], s:"active" },
+      { n:"滝川", ch:["fax"], s:"active", lastSaved:"06/20" },
       { n:"ホリウチ建営", ch:["mail","fax"], s:"active" },
       { n:"山田銘建", ch:["fax"], s:"active" }
     ]},
     { title:"経費・仕入・その他", vendors:[
-      { n:"浜松小松フォークリフト", ch:["mail"], s:"fixed" },
+      { n:"浜松小松フォークリフト", ch:["mail"], s:"fixed", lastSaved:"06/22" },
       { n:"日税ビジネスサービス", ch:["mail"], s:"warn" },
       { n:"中部レジン", ch:["mail"], s:"active" },
       { n:"スズイチ", ch:["mail"], s:"active" },
       { n:"井上フシック", ch:["mail"], s:"active" },
       { n:"Google Cloud", ch:["mail"], s:"active" },
       { n:"1Password", ch:["mail"], s:"active" },
-      { n:"eFax", ch:["mail"], s:"active" }
+      { n:"eFax 受信", ch:["fax"], s:"active" }
     ]}
   ],
-  todo: "<b>残2通（過去分）：</b>日税ビジネスサービス(6/20)・千葉県木材市場協組(6/17) は添付PDFのMIME不備で当初未保存。保存ルールは修正済みのため、両メールの保存済みラベルを外せば毎時トリガーが自動回収します。今後届く新規分は3社とも自動保存されます。"
+  todo: "<b>要確認（鮮度・黄）：</b>ナイス横浜(最終05/12)・中央木材大口(05/21) は直近の保存が無く、取引が止まっているか取りこぼしか要確認。千葉県木材市場協組は精算書(6/17メール)が未保存、日税は過去1通が未保存（いずれも保存ルールは修正済み＝ラベルを外せば毎時トリガーが自動回収）。<br><b>最終保存日</b>はDriveの実ファイル（納品書/請求書/丸宇フォルダ）から抽出（2026-06-23時点）。空欄はFAX台帳経由で日付未取得。"
 };
 
 const CH = { mail:"✉", fax:"📠" };
