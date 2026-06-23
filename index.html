@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>書類自動保存ステータスボード｜林材木店</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📑</text></svg>">
+<style>
+  :root{
+    --bg:#f4f5f3; --card:#ffffff; --ink:#1f2421; --muted:#6b7280; --hint:#9aa0a6;
+    --line:#e3e6e1; --green:#1D9E75; --blue:#378ADD; --amber:#EF9F27; --red:#E24B4A;
+    --green-bg:#E1F5EE; --blue-bg:#E6F1FB; --amber-bg:#FAEEDA;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",Meiryo,sans-serif;
+    line-height:1.6; -webkit-text-size-adjust:100%;}
+  .wrap{max-width:960px; margin:0 auto; padding:20px 16px 56px;}
+  header h1{font-size:20px; font-weight:600; margin:0 0 2px; display:flex; align-items:center; gap:8px;}
+  header p{margin:0; font-size:13px; color:var(--hint);}
+  .updated{font-size:12px; color:var(--hint); margin-top:6px;}
+  .updated b{color:var(--muted); font-weight:600;}
+  .metrics{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin:20px 0;}
+  .metric{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px;}
+  .metric .l{font-size:12px; color:var(--muted);}
+  .metric .v{font-size:24px; font-weight:600; margin-top:2px;}
+  .legend{display:flex; flex-wrap:wrap; gap:14px; align-items:center; font-size:12px; color:var(--muted); margin-bottom:18px;}
+  .legend .dot{display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:6px; vertical-align:-1px;}
+  .legend .sp{margin-left:auto; display:flex; gap:12px;}
+  .group{margin-bottom:22px;}
+  .group h2{font-size:13px; font-weight:600; color:var(--muted); margin:0 0 8px;}
+  .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:8px;}
+  .v-card{background:var(--card); border:1px solid var(--line); border-left:3px solid var(--line);
+    border-radius:8px; padding:9px 11px; display:flex; align-items:center; gap:9px;}
+  .v-card .vd{width:8px; height:8px; border-radius:50%; flex:none;}
+  .v-card .vn{font-size:13px; flex:1; min-width:0;}
+  .v-card .vc{font-size:11px; color:var(--hint); flex:none; white-space:nowrap;}
+  .v-card .vm{font-size:11px; color:var(--green); flex:none; white-space:nowrap;}
+  .s-active{border-left-color:var(--green)} .s-active .vd{background:var(--green)}
+  .s-fixed{border-left-color:var(--blue)} .s-fixed .vd{background:var(--blue)}
+  .s-warn{border-left-color:var(--amber)} .s-warn .vd{background:var(--amber)}
+  .note{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; font-size:13px; color:var(--muted); margin-top:8px;}
+  .note b{color:var(--ink); font-weight:600;}
+  .src{font-size:11px; color:var(--hint); margin-top:18px; text-align:center;}
+  .live-pill{display:inline-block; font-size:11px; padding:2px 8px; border-radius:999px; margin-left:8px;}
+  .live-on{background:var(--green-bg); color:#0F6E56;}
+  .live-off{background:var(--amber-bg); color:#854F0B;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>📑 書類自動保存ステータスボード<span id="livePill" class="live-pill live-off">スナップショット</span></h1>
+    <p>領収書・請求書・精算書・納品書の自動ダウンロード管理｜林材木店</p>
+    <div class="updated">最終更新：<b id="asOf">2026-06-23</b></div>
+  </header>
+
+  <div class="metrics" id="metrics"></div>
+
+  <div class="legend">
+    <span><span class="dot" style="background:var(--green)"></span>自動保存 稼働中</span>
+    <span><span class="dot" style="background:var(--blue)"></span>今セッションで修復/追加</span>
+    <span><span class="dot" style="background:var(--amber)"></span>過去分のみ要対応</span>
+    <span class="sp"><span>✉ メール</span><span>📠 FAX</span></span>
+  </div>
+
+  <div id="groups"></div>
+
+  <div class="note" id="todo"></div>
+
+  <div class="src" id="src"></div>
+</div>
+
+<script>
+/* ===== 設定: GAS JSON APIのURL（/exec）を入れるとライブ表示になる。空ならスナップショット表示 ===== */
+const CONFIG = { apiUrl: "" };
+
+/* ===== スナップショット（2026-06-23時点／このセッションの調査・修復結果） ===== */
+const SNAPSHOT = {
+  asOf: "2026-06-23",
+  metrics: [
+    { l:"登録取引先", v:"37 社" },
+    { l:"自動保存カバー", v:"ほぼ100%", c:"var(--green)" },
+    { l:"今セッション修復", v:"4 件", c:"var(--blue)" },
+    { l:"残・手動対応", v:"2 通", c:"var(--amber)" }
+  ],
+  groups: [
+    { title:"市売（毎週・精算書/納品書）", vendors:[
+      { n:"丸宇 大栄浜", ch:["mail","fax"], s:"fixed" },
+      { n:"丸宇 北浜",   ch:["mail","fax"], s:"fixed" },
+      { n:"丸宇 下館",   ch:["mail","fax"], s:"fixed" },
+      { n:"丸宇 京葉",   ch:["mail","fax"], s:"fixed" },
+      { n:"勝山木材市場", ch:["mail","fax"], s:"active" },
+      { n:"ナイス 沼津/浜松ほか", ch:["mail","fax"], s:"active" },
+      { n:"アイザワ", ch:["fax"], s:"active" },
+      { n:"金平", ch:["fax"], s:"active" },
+      { n:"千葉県木材市場協組", ch:["mail","fax"], s:"warn" },
+      { n:"中央木材 西部/浜松/大口", ch:["fax"], s:"active" },
+      { n:"HIKARI", ch:["fax"], s:"active" },
+      { n:"ミトモク日立", ch:["fax"], s:"active" },
+      { n:"吉貞 熊谷/佐野", ch:["fax"], s:"active" }
+    ]},
+    { title:"付売（毎月・請求書）", vendors:[
+      { n:"ナイス 資材事業部", ch:["mail"], s:"active" },
+      { n:"イチカワ", ch:["mail","fax"], s:"active" },
+      { n:"糸永", ch:["mail"], s:"active" },
+      { n:"オオツカ", ch:["mail","fax"], s:"active" },
+      { n:"ニッチ / 松本", ch:["mail","fax"], s:"active" },
+      { n:"カネ信木材", ch:["fax"], s:"active" },
+      { n:"滝川", ch:["fax"], s:"active" },
+      { n:"ホリウチ建営", ch:["mail","fax"], s:"active" },
+      { n:"山田銘建", ch:["fax"], s:"active" }
+    ]},
+    { title:"経費・仕入・その他", vendors:[
+      { n:"浜松小松フォークリフト", ch:["mail"], s:"fixed" },
+      { n:"日税ビジネスサービス", ch:["mail"], s:"warn" },
+      { n:"中部レジン", ch:["mail"], s:"active" },
+      { n:"スズイチ", ch:["mail"], s:"active" },
+      { n:"井上フシック", ch:["mail"], s:"active" },
+      { n:"Google Cloud", ch:["mail"], s:"active" },
+      { n:"1Password", ch:["mail"], s:"active" },
+      { n:"eFax", ch:["mail"], s:"active" }
+    ]}
+  ],
+  todo: "<b>残2通（過去分）：</b>日税ビジネスサービス(6/20)・千葉県木材市場協組(6/17) は添付PDFのMIME不備で当初未保存。保存ルールは修正済みのため、両メールの保存済みラベルを外せば毎時トリガーが自動回収します。今後届く新規分は3社とも自動保存されます。"
+};
+
+const CH = { mail:"✉", fax:"📠" };
+
+function render(d, live){
+  document.getElementById("asOf").textContent = d.asOf || "—";
+  const pill = document.getElementById("livePill");
+  pill.textContent = live ? "ライブ" : "スナップショット";
+  pill.className = "live-pill " + (live ? "live-on" : "live-off");
+
+  const m = document.getElementById("metrics"); m.innerHTML = "";
+  (d.metrics||[]).forEach(x=>{
+    const el = document.createElement("div"); el.className="metric";
+    el.innerHTML = '<div class="l">'+x.l+'</div><div class="v" style="'+(x.c?('color:'+x.c):'')+'">'+x.v+'</div>';
+    m.appendChild(el);
+  });
+
+  const root = document.getElementById("groups"); root.innerHTML = "";
+  (d.groups||[]).forEach(g=>{
+    const sec = document.createElement("div"); sec.className="group";
+    sec.innerHTML = '<h2>'+g.title+'（'+g.vendors.length+'）</h2>';
+    const grid = document.createElement("div"); grid.className="grid";
+    g.vendors.forEach(v=>{
+      const c = document.createElement("div"); c.className="v-card s-"+v.s;
+      const chh = (v.ch||[]).map(x=>CH[x]).join(" ");
+      const meta = v.lastSaved ? '<span class="vm">'+v.lastSaved+'</span>' : '';
+      c.innerHTML = '<span class="vd"></span><span class="vn">'+v.n+'</span>'+meta+'<span class="vc">'+chh+'</span>';
+      grid.appendChild(c);
+    });
+    sec.appendChild(grid); root.appendChild(sec);
+  });
+
+  document.getElementById("todo").innerHTML = d.todo || "";
+  document.getElementById("src").textContent = live
+    ? "データ：GAS JSON API（Gmailラベル＋Driveから自動集計）"
+    : "データ：スナップショット（手動更新）。ライブ化はGAS APIを接続";
+}
+
+(async function(){
+  render(SNAPSHOT, false);
+  if (CONFIG.apiUrl) {
+    try {
+      const r = await fetch(CONFIG.apiUrl, { redirect:"follow" });
+      const j = await r.json();
+      if (j && j.groups) render(j, true);
+    } catch(e) { /* APIが無ければスナップショットのまま */ }
+  }
+})();
+</script>
+</body>
+</html>
