@@ -85,8 +85,8 @@ const SNAPSHOT = {
   metrics: [
     { l:"登録取引先", v:"37 社" },
     { l:"自動保存カバー", v:"ほぼ100%", c:"var(--green)" },
-    { l:"今セッション修復", v:"4 件", c:"var(--blue)" },
-    { l:"残・手動対応", v:"2 通", c:"var(--amber)" }
+    { l:"今セッション修復", v:"3 件", c:"var(--blue)" },
+    { l:"残・手動対応", v:"1 通", c:"var(--amber)" }
   ],
   groups: [
     { title:"市売（毎週・精算書/納品書）", vendors:[
@@ -123,7 +123,6 @@ const SNAPSHOT = {
     ]},
     { title:"経費・仕入・その他", vendors:[
       { n:"浜松小松フォークリフト", ch:["mail"], s:"fixed", lastSaved:"06/22", f:"1jE3rKQlNwbVDESGh_z1P7usAcmpus4nx" },
-      { n:"日税ビジネスサービス", ch:["mail"], s:"warn", f:"1jE3rKQlNwbVDESGh_z1P7usAcmpus4nx" },
       { n:"中部レジン", ch:["mail"], s:"active", f:"1hr1Yrap4mFZ9uy2BDbI396H8laE7zVrA" },
       { n:"スズイチ", ch:["mail"], s:"active", f:"1CklTVn755TbF5nI7yxmIVBWvXZZsYj1M" },
       { n:"井上フシック", ch:["mail"], s:"active", f:"1V2jJm9EJfh-P-YA9KDB2CyloZPUWAMcs" },
@@ -132,7 +131,7 @@ const SNAPSHOT = {
       { n:"eFax 受信", ch:["fax"], s:"active", f:"1xN9kQR_hJq7LHrvvJIGtLo-SDChtLSDC" }
     ]}
   ],
-  todo: "<b>要確認（鮮度・黄）：</b>ナイス横浜(最終05/12)・中央木材大口(05/21) は直近の保存が無く、取引が止まっているか取りこぼしか要確認。千葉県木材市場協組は精算書(6/17メール)が未保存、日税は過去1通が未保存（いずれも保存ルールは修正済み＝ラベルを外せば毎時トリガーが自動回収）。<br><b>最終保存日</b>はDriveの実ファイル（納品書/請求書/丸宇フォルダ）から抽出（2026-06-23時点）。空欄はFAX台帳経由で日付未取得。"
+  todo: "<b>要確認（鮮度・黄）：</b>ナイス横浜(最終05/12)・中央木材大口(05/21) は直近の保存が無く、取引が止まっているか取りこぼしか要確認。千葉県木材市場協組は精算書(6/17メール)が未保存（保存ルールは修正済み＝ラベルを外せば毎時トリガーが自動回収）。<br><b>最終保存日</b>はDriveの実ファイル（納品書/請求書/丸宇フォルダ）から抽出（2026-06-23時点）。空欄はFAX台帳経由で日付未取得。"
 };
 
 const CH = { mail:"✉", fax:"📠" };
