@@ -9,6 +9,7 @@
   :root{
     --bg:#f4f5f3; --card:#ffffff; --ink:#1f2421; --muted:#6b7280; --hint:#9aa0a6;
     --line:#e3e6e1; --green:#1D9E75; --blue:#378ADD; --amber:#EF9F27; --red:#E24B4A;
+    --purple:#7F77DD; --gray:#888780;
     --green-bg:#E1F5EE; --blue-bg:#E6F1FB; --amber-bg:#FAEEDA;
   }
   *{box-sizing:border-box}
@@ -43,6 +44,8 @@
   .s-active{border-left-color:var(--green)} .s-active .vd{background:var(--green)}
   .s-fixed{border-left-color:var(--blue)} .s-fixed .vd{background:var(--blue)}
   .s-warn{border-left-color:var(--amber)} .s-warn .vd{background:var(--amber)}
+  .s-semi{border-left-color:var(--purple)} .s-semi .vd{background:var(--purple)}
+  .s-manual{border-left-color:var(--gray)} .s-manual .vd{background:var(--gray)}
   .note{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; font-size:13px; color:var(--muted); margin-top:8px;}
   .note b{color:var(--ink); font-weight:600;}
   .src{font-size:11px; color:var(--hint); margin-top:18px; text-align:center;}
@@ -64,8 +67,10 @@
   <div class="legend">
     <span><span class="dot" style="background:var(--green)"></span>自動保存 稼働中</span>
     <span><span class="dot" style="background:var(--blue)"></span>今セッションで修復/追加</span>
-    <span><span class="dot" style="background:var(--amber)"></span>過去分のみ要対応</span>
-    <span class="sp"><span>✉ メール</span><span>📠 FAX</span><span>📁 クリックで保存先フォルダを開く</span></span>
+    <span><span class="dot" style="background:var(--purple)"></span>半自動（Web-DLスキル）</span>
+    <span><span class="dot" style="background:var(--amber)"></span>要対応</span>
+    <span><span class="dot" style="background:var(--gray)"></span>手動</span>
+    <span class="sp"><span>✉ メール</span><span>📠 FAX</span><span>🌐 Web</span><span>📁 フォルダを開く</span></span>
   </div>
 
   <div id="groups"></div>
@@ -81,7 +86,7 @@ const CONFIG = { apiUrl: "" };
 
 /* ===== スナップショット（2026-06-23時点／このセッションの調査・修復結果） ===== */
 const SNAPSHOT = {
-  asOf: "2026-06-23",
+  asOf: "2026-06-24",
   metrics: [
     { l:"登録取引先", v:"37 社" },
     { l:"自動保存カバー", v:"ほぼ100%", c:"var(--green)" },
@@ -121,7 +126,7 @@ const SNAPSHOT = {
       { n:"ホリウチ建営", ch:["mail","fax"], s:"active" },
       { n:"山田銘建", ch:["fax"], s:"active" }
     ]},
-    { title:"経費・仕入・その他", vendors:[
+    { title:"経費（メール自動保存）", vendors:[
       { n:"浜松小松フォークリフト", ch:["mail"], s:"fixed", lastSaved:"06/22", f:"1jE3rKQlNwbVDESGh_z1P7usAcmpus4nx" },
       { n:"中部レジン", ch:["mail"], s:"active", f:"1hr1Yrap4mFZ9uy2BDbI396H8laE7zVrA" },
       { n:"スズイチ", ch:["mail"], s:"active", f:"1CklTVn755TbF5nI7yxmIVBWvXZZsYj1M" },
@@ -129,12 +134,23 @@ const SNAPSHOT = {
       { n:"Google Cloud", ch:["mail"], s:"active", f:"11UyLTXsWhCZuOzfDIzHM59s3dYp-mnGm" },
       { n:"1Password", ch:["mail"], s:"active", f:"1qLkaNAZMEW4kpYhi1XieumZKG_Xn1BPv" },
       { n:"eFax 受信", ch:["fax"], s:"active", f:"1xN9kQR_hJq7LHrvvJIGtLo-SDChtLSDC" }
+    ]},
+    { title:"経費（Webポータル｜半自動スキル・手動）", vendors:[
+      { n:"佐川急便", ch:["web"], s:"semi", lastSaved:"06/20", f:"1ARXtFCu-oYhhPkSRCQZFCwfN7CyoOZWr" },
+      { n:"bizimo光", ch:["web"], s:"semi", lastSaved:"05月", f:"18us9jLwc6eylTslEb5lCRQOe6NsM9N6I" },
+      { n:"西濃運輸", ch:["web"], s:"manual", f:"1AO0Sg_9u29JCNK_bHhou1Oqwo8BIskAp" },
+      { n:"ソフトバンク", ch:["web"], s:"manual", f:"1AXUH8bybiyzlWa_ym8OIoY6sb9ewRJS_" },
+      { n:"携帯 大樹", ch:["web"], s:"manual", f:"1B_P5qGTP-e3FHAsg01kPHaQuJcs3zXJc" },
+      { n:"携帯 楓", ch:["web"], s:"manual", f:"120ojf3QywZczF7HP403GzX-F3xb_pR3-" },
+      { n:"TNC", ch:["web"], s:"manual", f:"1QSAvpYjmO5POxugwxpBzM9vZxLffjzby" },
+      { n:"アストマックス", ch:["web"], s:"manual", f:"11GF0AyHT46J7yLA5mt-uSgkeOtyaok_l" },
+      { n:"平松材木", ch:["fax"], s:"manual", f:"1isZ_9wDiQcqRlT_VTfEcefK5OYITFB76" }
     ]}
   ],
   todo: "<b>要確認（鮮度・黄）：</b>ナイス横浜(最終05/12)・中央木材大口(05/21) は直近の保存が無く、取引が止まっているか取りこぼしか要確認。千葉県木材市場協組は精算書(6/17メール)が未保存（保存ルールは修正済み＝ラベルを外せば毎時トリガーが自動回収）。<br><b>最終保存日</b>はDriveの実ファイル（納品書/請求書/丸宇フォルダ）から抽出（2026-06-23時点）。空欄はFAX台帳経由で日付未取得。"
 };
 
-const CH = { mail:"✉", fax:"📠" };
+const CH = { mail:"✉", fax:"📠", web:"🌐" };
 
 function render(d, live){
   document.getElementById("asOf").textContent = d.asOf || "—";
