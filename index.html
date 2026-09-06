@@ -86,7 +86,7 @@ const CONFIG = { apiUrl: "" };
 
 /* ===== スナップショット（2026-06-23時点／このセッションの調査・修復結果） ===== */
 const SNAPSHOT = {
-  asOf: "2026-08-24",
+  asOf: "2026-09-07",
   metrics: [
     { l:"登録取引先", v:"37 社" },
     { l:"自動保存カバー", v:"ほぼ100%", c:"var(--green)" },
@@ -95,19 +95,19 @@ const SNAPSHOT = {
   ],
   groups: [
     { title:"市売（毎週・精算書/納品書）", vendors:[
-      { n:"丸宇 下館",   ch:["mail","fax"], s:"active",  lastSaved:"08/18", f:"1A5KQUaZXWZrvbDctgRfM0TOGDMrbh6aP" },
+      { n:"丸宇 下館",   ch:["mail","fax"], s:"warn",  lastSaved:"08/18", f:"1A5KQUaZXWZrvbDctgRfM0TOGDMrbh6aP" },
       { n:"丸宇 大栄浜", ch:["mail","fax"], s:"warn",  lastSaved:"07/22", f:"1A5KQUaZXWZrvbDctgRfM0TOGDMrbh6aP" },
-      { n:"丸宇 北浜",   ch:["mail","fax"], s:"active",  lastSaved:"08/20", f:"1A5KQUaZXWZrvbDctgRfM0TOGDMrbh6aP" },
+      { n:"丸宇 北浜",   ch:["mail","fax"], s:"warn",  lastSaved:"08/20", f:"1A5KQUaZXWZrvbDctgRfM0TOGDMrbh6aP" },
       { n:"丸宇 京葉",   ch:["mail","fax"], s:"warn",  lastSaved:"07/23", f:"1A5KQUaZXWZrvbDctgRfM0TOGDMrbh6aP" },
-      { n:"ナイス 小牧", ch:["mail","fax"], s:"active",   lastSaved:"08/21", f:"1Zo5rbimrxVinOcKcdVmr73ZT_Svq8lPj" },
+      { n:"ナイス 小牧", ch:["mail","fax"], s:"warn",   lastSaved:"08/21", f:"1Zo5rbimrxVinOcKcdVmr73ZT_Svq8lPj" },
       { n:"ナイス 沼津", ch:["mail","fax"], s:"warn",   lastSaved:"08/06", f:"1Zo5rbimrxVinOcKcdVmr73ZT_Svq8lPj" },
       { n:"ナイス 浜松", ch:["mail","fax"], s:"warn",   lastSaved:"06/11", f:"1Zo5rbimrxVinOcKcdVmr73ZT_Svq8lPj" },
       { n:"ナイス 新潟", ch:["mail","fax"], s:"warn",   lastSaved:"06/10", f:"1Zo5rbimrxVinOcKcdVmr73ZT_Svq8lPj" },
       { n:"ナイス 相模原", ch:["mail","fax"], s:"warn",   lastSaved:"07/24", f:"1Zo5rbimrxVinOcKcdVmr73ZT_Svq8lPj" },
       { n:"ナイス 横浜", ch:["mail","fax"], s:"warn",  lastSaved:"05/12", f:"1Zo5rbimrxVinOcKcdVmr73ZT_Svq8lPj" },
-      { n:"勝山木材市場", ch:["mail","fax"], s:"active", lastSaved:"08/21", f:"19gIRR_WGwSM4MUNHd_n_517L4DJsfDj_" },
+      { n:"勝山木材市場", ch:["mail","fax"], s:"warn", lastSaved:"08/21", f:"19gIRR_WGwSM4MUNHd_n_517L4DJsfDj_" },
       { n:"アイザワ", ch:["fax"], s:"warn", lastSaved:"06/05", f:"19gIRR_WGwSM4MUNHd_n_517L4DJsfDj_" },
-      { n:"HIKARI", ch:["fax"], s:"active", lastSaved:"08/18", f:"19gIRR_WGwSM4MUNHd_n_517L4DJsfDj_" },
+      { n:"HIKARI", ch:["fax"], s:"warn", lastSaved:"08/18", f:"19gIRR_WGwSM4MUNHd_n_517L4DJsfDj_" },
       { n:"千葉県木材市場協組", ch:["mail","fax"], s:"warn", lastSaved:"07/11", f:"1LYBMNzgLnHxgvsu31hN_iyfStanPD9O_" },
       { n:"中央木材 大口", ch:["fax"], s:"warn", lastSaved:"05/21", f:"19gIRR_WGwSM4MUNHd_n_517L4DJsfDj_" },
       { n:"中央木材 西部/浜松", ch:["fax"], s:"active", f:"13_44mojpZHguCKVkSwkPMwn4xn8BOUp7" },
@@ -122,15 +122,15 @@ const SNAPSHOT = {
       { n:"ニッチ / 松本", ch:["mail","fax"], s:"warn", lastSaved:"07/03" },
       { n:"糸永", ch:["mail"], s:"active" },
       { n:"カネ信木材", ch:["fax"], s:"active", f:"1we6yn5BFeqVPumgXC5lMcPgmhgxt9P3U" },
-      { n:"滝川", ch:["fax"], s:"warn", lastSaved:"06/20" },
+      { n:"滝川", ch:["fax"], s:"active", lastSaved:"09/05" },
       { n:"ホリウチ建営", ch:["mail","fax"], s:"active" },
       { n:"山田銘建", ch:["fax"], s:"active" }
     ]},
     { title:"経費（メール自動保存）", vendors:[
       { n:"浜松小松フォークリフト", ch:["mail"], s:"active", lastSaved:"08/21", f:"1jE3rKQlNwbVDESGh_z1P7usAcmpus4nx" },
       { n:"中部レジン", ch:["mail"], s:"active", f:"1hr1Yrap4mFZ9uy2BDbI396H8laE7zVrA" },
-      { n:"スズイチ", ch:["mail"], s:"active", lastSaved:"07/17", f:"1CklTVn755TbF5nI7yxmIVBWvXZZsYj1M" },
-      { n:"井上フシック", ch:["mail"], s:"active", lastSaved:"07/21", f:"1V2jJm9EJfh-P-YA9KDB2CyloZPUWAMcs" },
+      { n:"スズイチ", ch:["mail"], s:"warn", lastSaved:"07/17", f:"1CklTVn755TbF5nI7yxmIVBWvXZZsYj1M" },
+      { n:"井上フシック", ch:["mail"], s:"warn", lastSaved:"07/21", f:"1V2jJm9EJfh-P-YA9KDB2CyloZPUWAMcs" },
       { n:"Google Cloud", ch:["mail"], s:"active", f:"11UyLTXsWhCZuOzfDIzHM59s3dYp-mnGm" },
       { n:"1Password", ch:["mail"], s:"active", f:"1qLkaNAZMEW4kpYhi1XieumZKG_Xn1BPv" },
       { n:"eFax 受信", ch:["fax"], s:"active", f:"1xN9kQR_hJq7LHrvvJIGtLo-SDChtLSDC" }
@@ -147,7 +147,7 @@ const SNAPSHOT = {
       { n:"平松材木", ch:["fax"], s:"manual", f:"1isZ_9wDiQcqRlT_VTfEcefK5OYITFB76" }
     ]}
   ],
-  todo: "<b>✅自動取込は復旧した。</b>3週間続いた停止が解消し、3系統とも再稼働。納品書は08/17以降5件（HIKARI 08/17,08/18・丸宇 下館 08/18・丸宇 北浜 08/20・ナイス滋賀 08/20）、請求書は08/21に3件（浜松小松・日税NBS・イチカワ）、FAX台帳は08/20〜08/21に4件（勝山・ナイス小牧ほか）を取得。<br><b>🚨要確認（長期途絶・市売）：</b>ナイス横浜(最終05/12)・中央木材大口(05/21)は3か月超、<b>アイザワ(06/05)・ナイス新潟(06/10)・ナイス浜松(06/11)・吉貞 熊谷/佐野(06/24)</b>は2か月超。自動取込が復旧してもこの6社は新規保存が無いため、取引停止か取りこぼしかの切り分けが必要。<br><b>市売の10日超（黄）：</b>千葉県木材市場協組(07/11)・丸宇 大栄浜(07/22)・金平(07/22)・丸宇 京葉(07/23)・ナイス相模原(07/24)・ナイス沼津(08/06)。<br><b>今回 緑 に復帰：</b>丸宇 下館(08/18)・丸宇 北浜(08/20)・HIKARI(08/18)・ナイス小牧(08/21)・勝山木材市場(08/21)・イチカワ(08/21)・浜松小松フォークリフト(08/21)。<br><b>付売の40日超：</b>オオツカ(06/20)・滝川(06/20)・ニッチ/松本(07/03)。8月の請求書は08/21に届いているため、この3社は未着か別経路の可能性。<br><b>丸宇 各市場</b>の精算書フォルダは今回もDrive APIから読み取れず（Operation not supported）、大栄浜・京葉は前回値を維持。下館・北浜は納品書フォルダ側の実データで更新。<br><b>最終保存日</b>はDriveの実ファイル（納品書／請求書／FAX台帳フォルダ）のファイル名先頭日付から抽出（2026-08-24時点・直近60日）。取得値が既存値より古い場合は既存値を維持。空欄はFAX台帳経由で日付未取得。"
+  todo: "<b>🚨 自動取込が再び止まっている。</b>納品書フォルダは<b>08/20を最後に18日間新規保存ゼロ</b>（直近：ナイス滋賀 08/20・丸宇 北浜 08/20・丸宇 下館 08/18・HIKARI 08/18）。請求書は08/31（アツミ商会）、FAX台帳は09/05（滝川）まで届いているので、<b>取引先側ではなく納品書の取込経路（Macの毎朝8:15）が止まっている可能性が高い</b>。<br><b>市売は全社が黄（10日超）：</b>勝山木材市場(08/21)・ナイス小牧(08/21)・丸宇 北浜(08/20)・丸宇 下館(08/18)・HIKARI(08/18)・ナイス沼津(08/06)・ナイス相模原(07/24)・丸宇 京葉(07/23)・丸宇 大栄浜(07/22)・金平(07/22)・千葉県木材市場協組(07/11)。<br><b>長期途絶（取引停止か取りこぼしの切り分けが必要）：</b>ナイス横浜(05/12)・中央木材 大口(05/21)・アイザワ(06/05)・ナイス新潟(06/10)・ナイス浜松(06/11)・吉貞 熊谷/佐野(06/24)。<br><b>付売の40日超：</b>オオツカ(06/20)・ニッチ/松本(07/03)。滝川は09/05のFAX受信で緑に復帰。<br><b>経費の40日超：</b>スズイチ(07/17)・井上フシック(07/21)。<br><b>丸宇 各市場</b>の精算書フォルダは今回もDrive APIから読み取れず（Operation not supported）、大栄浜・京葉は前回値を維持。Webポータル経費（佐川・西濃・bizimo・アストマックス）は半自動スキル運用のため鮮度判定の対象外。<br><b>最終保存日</b>はDriveの実ファイル（納品書／請求書／FAX台帳）のファイル名先頭日付から抽出（2026-09-07時点・直近60日）。取得値が既存値より古い場合は既存値を維持。空欄はFAX台帳経由で日付未取得。"
 };
 
 const CH = { mail:"✉", fax:"📠", web:"🌐" };
